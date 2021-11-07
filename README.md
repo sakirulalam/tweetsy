@@ -133,6 +133,7 @@ Attributes:
 * `quote`: If the tweet is a quote, this will be a `TweetLink` object, otherwise `None`.
 * `poll`: If the tweet is a poll, this will be a `TweetLink` object, otherwise `None`.
 * `reply`If the tweet is a poll, this will be a `TweetLink` object, otherwise `None`.
+* `absolute_url`
 
 It is adviced to fetch the `favorite_count`, `retweet_count`, `reply_count` and the `quote_count` of a vanilla tweet and not of a quote or retweet tweet.
 
