@@ -7,20 +7,20 @@ This package was originally designed to get user information (i.e. name, number 
 >>> from tweetsy.user import User
 >>> user = User('DrTedros')
 >>> user
->>> <tweetsy.user.User object at 0x0000007B0C5C74F0>
+<tweetsy.user.User object at 0x0000007B0C5C74F0>
 >>> user.name
->>> 'Tedros Adhanom Ghebreyesus'
+'Tedros Adhanom Ghebreyesus'
 ```
 As it can be seen, the when we create an instance of the `User` object providing the username of a user, we can access relevant data of the user. The full API is given at the end of this page. Here is how we get the profile picture, number of followers of the user and the date when the profile was created.
 ```python
 >>> user.profile_image
->>> {'normal': 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_normal.png', 'medium': 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_200x200.png', 'large': 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_400x400.png'}
+{'normal': 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_normal.png', 'medium': 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_200x200.png', 'large': 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_400x400.png'}
 >>> user.profile_image['large']
->>> 'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_400x400.png'
+'https://pbs.twimg.com/profile_images/1337835478704291842/O1A5QF3x_400x400.png'
 >>> user.follower_count
->>> 1573518
+1573518
 >>> user.created_at
->>> datetime.datetime(2010, 9, 12, 13, 9, 27, tzinfo=datetime.timezone.utc)
+datetime.datetime(2010, 9, 12, 13, 9, 27, tzinfo=datetime.timezone.utc)
 ```
 The `created_at` attribute returns a python `datetime` object instead of plain text, which makes it a lot easier to manipulate and use the data for in future.
 ## Getting user tweets
@@ -28,11 +28,11 @@ The `get_tweets` method of the `User` class fetches the tweets. This method retu
 ```python
 >>> tweets, cursor = user.get_tweets(5)
 >>> tweets[0]
->>> <tweetsy.tweet.Tweet object at 0x0000007B0EFFF430>
+<tweetsy.tweet.Tweet object at 0x0000007B0EFFF430>
 >>> tweets[0].absolute_url
->>> 'https://twitter.com/DrTedros/status/1457104908633640966'
+'https://twitter.com/DrTedros/status/1457104908633640966'
 >>> cursor
->>> 'HBaAwLmhjM3FuCgAAA=='
+'HBaAwLmhjM3FuCgAAA=='
 >>> next_tweets, next_cursor = user.get_tweets(5, cursor=cursor)
 ```
 ### The `Tweet` Object
@@ -40,22 +40,22 @@ The tweet object comes with a lot of attributes.
 ```python
 >>> tweet = tweets[0]
 >>> tweet.text
->>> 'RT @benphillips76: This photo of Tuvalu's virtual address to the Climate Confer ence says everything that should need to be said.  #COP26 ht.'
+'RT @benphillips76: This photo of Tuvalu's virtual address to the Climate Confer ence says everything that should need to be said.  #COP26 ht.'
 >>> tweet.tweet_id
->>> '1457104908633640966'
+'1457104908633640966'
 >>> tweet.source
->>> 'Twitter for iPhone'
+'Twitter for iPhone'
 >>> tweet.family
->>> 'retweet'
+'retweet'
 ```
 The `family` attribute is very crucial. Not all tweets are plain texts or images, some are retweets of another tweet, some are quoted tweets. In this package the retweets and quotes contain their own attributes, which are `TweetLink` object, which refers to the original parent tweet. A `TweetLink` instane contains 3 attributes, `tweet_id`, `user_id`, `username`. This is better shown with an example.
 ```python
 >>> tweet.family
->>> 'retweet'
+'retweet'
 >>> tweet.retweet
->>> <tweetsy.tweet.TweetLink object at 0x0000007B0C60FAF0>
+<tweetsy.tweet.TweetLink object at 0x0000007B0C60FAF0>
 >>> tweet.retweet.absolute_url
->>> 'https://twitter.com/benphillips76/status/1456629120973017089'
+'https://twitter.com/benphillips76/status/1456629120973017089'
 ```
 This gives us the tweet by benphillips76, which was retweeted by DrTedros.
 
@@ -63,10 +63,10 @@ The `TweetLink` contains a method called `get_tweet`, which can be used to fetch
 ```python
 >>> new_tweet = tweet.retweet.get_tweet()
 >>> new_tweet
->>> <tweetsy.tweet.Tweet object at 0x0000007B0C5C7550>
+<tweetsy.tweet.Tweet object at 0x0000007B0C5C7550>
 >>> new_tweet.retweet_count
->>> 8909
+8909
 >>> new_tweet.media
->>> [{'type': 'photo', 'source': 'https://pbs.twimg.com/media/FDb8W1UXEAAgxiA.jpg', 'url': 'https://twitter.com/benphillips76/status/1456629120973017089/photo/1'}]
+[{'type': 'photo', 'source': 'https://pbs.twimg.com/media/FDb8W1UXEAAgxiA.jpg', 'url': 'https://twitter.com/benphillips76/status/1456629120973017089/photo/1'}]
 ```
 So from now on, the `new_tweet` can be treated like any other `Tweet` object.
