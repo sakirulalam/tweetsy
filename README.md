@@ -69,7 +69,7 @@ The `TweetLink` contains a method called `get_tweet`, which can be used to fetch
 >>> new_tweet.media
 [{'type': 'photo', 'source': 'https://pbs.twimg.com/media/FDb8W1UXEAAgxiA.jpg', 'url': 'https://twitter.com/benphillips76/status/1456629120973017089/photo/1'}]
 ```
-So from now on, the `new_tweet` can be treated like any other `Tweet` object.
+So from now on, `new_tweet` can be treated like any other `Tweet` object.
 
 ## Installation
 The package hasn't been published in PyPI yet. Since the package is very minimal, one can just simply do this:
