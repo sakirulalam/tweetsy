@@ -1,4 +1,4 @@
-# Tweetsy
+# DEPRECATED
 Tweetsy uses Twitter's underlying API to fetch user information and tweets and present it in a human-friendly way. What makes Tweetsy special is that everything is an object here. So it makes it very easier for the end users to store the data however they want, i.e. CSV, HTML or even in cloud database. This will become more clear in the following sections.
 ## Getting user data
 This package was originally designed to get user information (i.e. name, number of follower, profile image url) and tweets, given the username of the user. It all starts with the `User` class of the `user` module of this package.
